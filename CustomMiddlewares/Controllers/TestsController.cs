@@ -11,7 +11,7 @@ namespace CustomMiddlewares.Controllers
   {
     //[Sample]
     [HttpGet]
-    [Cache(duration:60)]
+    [Cache(duration:5)]
     public IActionResult Get()
     {
       var data = new List<SampleResponse> { new SampleResponse { Text = "Sample-1" }, new SampleResponse { Text = "Sample-2" } };

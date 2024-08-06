@@ -55,7 +55,11 @@ if (app.Environment.IsDevelopment())
 //app.UseMiddleware<IPAddressFilteringMiddleware>();
 //app.UseMiddleware<ErrorHandlingMiddleware>();
 //app.UseMiddleware<AttributeBasedMiddleware>();
+
+// Kendi hata midllewarelerinizi bütün middleware üzerinde tanýmlayýn.
+app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseMiddleware<ResponseCacheMiddleware>();
+
 
 app.UseHttpsRedirection();
 

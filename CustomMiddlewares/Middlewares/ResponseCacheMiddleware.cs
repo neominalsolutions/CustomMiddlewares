@@ -51,7 +51,8 @@ namespace CustomMiddlewares.Middlewares
         {
           context.Response.ContentType = "application/json";
           await context.Response.WriteAsJsonAsync(cacheResponse);
-         
+          // Response müdehale edip bir cache varsa cache değerini ekrana yazdırdık.
+          return;
         }
         else
         {
@@ -75,7 +76,7 @@ namespace CustomMiddlewares.Middlewares
             await stream.CopyToAsync(responseBody);
             context.Response.ContentType = "application/json";
             await context.Response.WriteAsJsonAsync(responseBodyString);
-
+            return;
 
           }
         }
