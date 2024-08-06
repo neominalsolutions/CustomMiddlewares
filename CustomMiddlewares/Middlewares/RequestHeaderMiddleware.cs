@@ -7,7 +7,9 @@ namespace CustomMiddlewares.Middlewares
 
   public class HeaderOptions
   {
-    public List<string> AllowedHeaderValues = new();
+    // Optionsları configuration dosyasında okurkan aşağıdaki gibi yazmayalım
+    // public List<string> AllowedHeaderValues = new();
+    public List<string> AllowedHeaderValues { get; set; }
   }
   public class RequestHeaderMiddleware
   {

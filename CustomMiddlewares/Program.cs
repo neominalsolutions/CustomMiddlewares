@@ -1,4 +1,5 @@
 using CustomMiddlewares.Middlewares;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,13 +11,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-var options = builder.Configuration["HeaderOptions:AllowedHeaderValues"];
+//var options = builder.Configuration["HeaderOptions:AllowedHeaderValues"];
+//var options2 = builder.Configuration.GetSection("HeaderOptions").Value;
 // Hard Coded olarak kullanýmý
 // middleware çalýþmasý için option girdik.
 builder.Services.Configure<HeaderOptions>(builder.Configuration.GetSection("HeaderOptions"));
 
 // uygulama genelinde tek instance yeterlidir.
 //builder.Services.AddSingleton<HeaderOptions>();
+
 
 
 var app = builder.Build();
