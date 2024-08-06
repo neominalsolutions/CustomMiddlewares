@@ -57,8 +57,9 @@ if (app.Environment.IsDevelopment())
 //app.UseMiddleware<AttributeBasedMiddleware>();
 
 // Kendi hata midllewarelerinizi bütün middleware üzerinde tanýmlayýn.
-app.UseMiddleware<ErrorHandlingMiddleware>();
-app.UseMiddleware<ResponseCacheMiddleware>();
+//app.UseMiddleware<ErrorHandlingMiddleware>();
+//app.UseMiddleware<ResponseCacheMiddleware>();
+app.UseMiddleware<FileCheckMiddleware>();
 
 
 app.UseHttpsRedirection();

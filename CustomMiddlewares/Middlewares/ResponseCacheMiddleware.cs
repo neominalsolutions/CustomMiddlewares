@@ -42,7 +42,7 @@ namespace CustomMiddlewares.Middlewares
       var path = context.Request.Path;
 
 
-      if (attributes.Any())
+      if (attributes.Any() && context.Request.Method == HttpMethod.Get.ToString())
       {
         var options = attributes.First();
         var responseBody = context.Response.Body;

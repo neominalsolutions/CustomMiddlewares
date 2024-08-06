@@ -22,7 +22,14 @@ namespace CustomMiddlewares.Controllers
     [HttpPost]
     public IActionResult Post([FromBody] ProductDto request)
     {
-      
+
+      //return BadRequest("dsad");
+      return Ok();
+    }
+
+    [HttpPost("/upload")]
+    public IActionResult Upload(IFormFile? file)
+    {
       return Ok();
     }
   }
