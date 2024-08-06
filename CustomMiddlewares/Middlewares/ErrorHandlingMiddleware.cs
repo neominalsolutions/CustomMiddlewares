@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Assistt.BLL.Layer;
+using System.ComponentModel.DataAnnotations;
 
 namespace CustomMiddlewares.Middlewares
 {
@@ -23,16 +24,26 @@ namespace CustomMiddlewares.Middlewares
       {
         await _next(context);
       }
+      catch(CustomException ex)
+      {
+        _logger.LogError(ex,ex.Message);
+        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+        await context.Response.WriteAsJsonAsync(new { message = ex.Message });
+
+        return;
+      }
       catch(ValidationException ex) // Validation Exception
       {
+        _logger.LogError(ex, ex.Message);
         context.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
         await context.Response.WriteAsJsonAsync(new { message = ex.Message });
         return;
       }
       catch (Exception ex)
       {
+        _logger.LogError(ex, ex.Message);
         context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-        await context.Response.WriteAsJsonAsync(new { message = ex.Message });
+        await context.Response.WriteAsJsonAsync(new { message = "Uygulamada beklemedik bir hata oluştu" });
         return;
       }
     }

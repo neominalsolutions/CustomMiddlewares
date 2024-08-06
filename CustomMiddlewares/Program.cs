@@ -1,3 +1,4 @@
+using Assistt.BLL.Layer.Services;
 using CustomMiddlewares.Middlewares;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net;
@@ -10,6 +11,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddMemoryCache();
 
 
 //var options = builder.Configuration["HeaderOptions:AllowedHeaderValues"];
@@ -25,7 +28,7 @@ builder.Services.Configure<HeaderOptions>(builder.Configuration.GetSection("Head
 
 // Factory Tanýmý yaptýðýmýz için AddTransient yeni bir middleware instance aldýk
 // ConfigureServices ile ilgi sýnýfýn instance göndereceðiz
-builder.Services.AddTransient<IPAddressFilteringMiddleware>();
+//builder.Services.AddTransient<IPAddressFilteringMiddleware>();
 
 // Konfigürasyon ddosyasýnda okumadðýmýz için ise elimiz ile yeni bir static instance tanýmladýk buda configure services 2. kullanýmý oldu.
 builder.Services.AddSingleton(new IPFilteringOptions
@@ -34,6 +37,8 @@ builder.Services.AddSingleton(new IPFilteringOptions
   WhiteList = new HashSet<System.Net.IPAddress> { IPAddress.Parse("::1"), },
 });
 
+
+builder.Services.AddScoped<ISampleService, SampleService>();
 
 var app = builder.Build();
 
@@ -46,8 +51,11 @@ if (app.Environment.IsDevelopment())
   //app.UseDeveloperExceptionPage();
 }
 
-app.UseMiddleware<RequestHeaderMiddleware>();
-app.UseMiddleware<IPAddressFilteringMiddleware>();
+//app.UseMiddleware<RequestHeaderMiddleware>();
+//app.UseMiddleware<IPAddressFilteringMiddleware>();
+//app.UseMiddleware<ErrorHandlingMiddleware>();
+//app.UseMiddleware<AttributeBasedMiddleware>();
+app.UseMiddleware<ResponseCacheMiddleware>();
 
 app.UseHttpsRedirection();
 

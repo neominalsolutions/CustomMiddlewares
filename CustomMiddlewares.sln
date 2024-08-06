@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomMiddlewares", "CustomMiddlewares\CustomMiddlewares.csproj", "{DCF77BB8-AFD8-406A-AA83-8186C07709D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assistt.BLL.Layer", "Assistt.BLL.Layer\Assistt.BLL.Layer.csproj", "{CED4C464-40D9-4E29-8E80-1AAAF833C9BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{DCF77BB8-AFD8-406A-AA83-8186C07709D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCF77BB8-AFD8-406A-AA83-8186C07709D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCF77BB8-AFD8-406A-AA83-8186C07709D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CED4C464-40D9-4E29-8E80-1AAAF833C9BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CED4C464-40D9-4E29-8E80-1AAAF833C9BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CED4C464-40D9-4E29-8E80-1AAAF833C9BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CED4C464-40D9-4E29-8E80-1AAAF833C9BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
