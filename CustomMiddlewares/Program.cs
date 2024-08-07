@@ -1,9 +1,15 @@
 using Assistt.BLL.Layer.Services;
 using CustomMiddlewares.Middlewares;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.WebHost.ConfigureKestrel(opt =>
+{
+  opt.AddServerHeader = false;
+});
 
 // Add services to the container.
 
@@ -13,6 +19,25 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddMemoryCache();
+
+builder.Services.AddCors(opt =>
+{
+  opt.AddPolicy("Default", policy =>
+  {
+    //{
+    //  policy.WithHeaders("GET", "POST");
+    //  policy.WithHeaders("");
+    policy.WithOrigins("100.100.10.10", "www.a.com");
+  });
+
+  opt.AddPolicy("Default2", policy =>
+  {
+    //{
+    //  policy.WithHeaders("GET", "POST");
+    //  policy.WithHeaders("");
+    policy.WithOrigins("100.100.10.10", "www.a.com");
+  });
+});
 
 
 //var options = builder.Configuration["HeaderOptions:AllowedHeaderValues"];
@@ -51,6 +76,13 @@ if (app.Environment.IsDevelopment())
   //app.UseDeveloperExceptionPage();
 }
 
+
+
+
+app.UseHsts();
+
+
+
 //app.UseMiddleware<RequestHeaderMiddleware>();
 //app.UseMiddleware<IPAddressFilteringMiddleware>();
 //app.UseMiddleware<ErrorHandlingMiddleware>();
@@ -62,12 +94,45 @@ if (app.Environment.IsDevelopment())
 //app.UseMiddleware<FileCheckMiddleware>();
 
 //app.UseMiddleware<CircuitBrakerMiddleware>();
-app.UseMiddleware<RateLimitingMiddleware>();
+//app.UseMiddleware<RateLimitingMiddleware>();
+
+
 
 app.UseHttpsRedirection();
+//app.UseMiddleware<SecurityHeaderMiddleware>();
+app.UseCors("Default");
+
+// Diðer Middlewareler
+
 
 app.UseAuthorization();
 
 app.MapControllers();
+
+//app.Use(async (context, next) =>
+//{
+//  if (context.Request.Path.StartsWithSegments("/api/clients"))
+//  {
+//    app.UseCors("Default");
+
+//    await next();
+//  }
+
+//});
+
+
+//app.MapWhen(x => x.Request.Path.StartsWithSegments("/api/clients"), async (app1) =>
+//{
+
+//  app1.UseCors("Default2");
+
+//  Console.WriteLine("Burasý");
+
+//  app.Run();
+
+
+
+//});
+
 
 app.Run();
