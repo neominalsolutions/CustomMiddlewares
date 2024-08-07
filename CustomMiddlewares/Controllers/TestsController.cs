@@ -16,6 +16,8 @@ namespace CustomMiddlewares.Controllers
     {
       var data = new List<SampleResponse> { new SampleResponse { Text = "Sample-1" }, new SampleResponse { Text = "Sample-2" } };
 
+      //throw new Exception("Hata");
+
       return Ok(data);
     }
 
